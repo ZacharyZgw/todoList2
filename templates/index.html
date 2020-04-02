@@ -15,7 +15,7 @@
         <nav class="templatemo-top-nav col-lg-12 col-md-12" style="margin-left: 200px">
             <ul class="text-uppercase">
                 <li><a href="/todo/list/" class="active">首页</a></li>
-                <li><a href="/todo/add/" >新建Todo</a></li>
+                <li><a href="/todo/add/" id="createTodo">新建Todo</a></li>
             </ul>
         </nav>
         <div style="margin-top: 30px"></div>
@@ -39,7 +39,7 @@
                             </thead>
                             <tbody>
                             {% for item in no_complete %}
-                                <tr>
+                                <tr name="todo" class="noComplete">
                                     <th class="text-center">{{ item.todo_id }}</th>
                                     <td class="text-center">{{ item.content }}</td>
                                     <td class="text-center">{{ item.createtime }}</td>
@@ -47,14 +47,14 @@
                                         <div>
                                             <input type="hidden" name="todo_id" value="{{ item.todo_id }}">
                                             <div role="presentation" class="dropdown">
-                                                <button class=" btn btn-primary block full-width m-b dropdown-toggle " data-toggle="dropdown" href="#">
+                                                <button class=" btn btn-primary block full-width m-b dropdown-toggle " data-toggle="dropdown" href="#" id="noComplete{{ item.todo_id }}">
                                                     操作<span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu " role="menu" >
                                                     <li><a href="/todo/delete/{{ item.todo_id }}" onclick="return confirm('确认删除?')">删除</a></li>
                                                     <li><a href="/todo/select/{{ item.todo_id }}/">查看</a>
                                                     </li>
-                                                    <li><a href="/todo/complete/{{ item.todo_id }}/">标记为已完成</a></li>
+                                                    <li><a href="/todo/complete/{{ item.todo_id }}/" id = "doComplete{{ item.todo_id }}">标记为已完成</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                             </thead>
                             <tbody>
                             {% for item in is_complete %}
-                                <tr>
+                                <tr name="todo" class="isComplete">
                                     <th class="text-center">{{ item.todo_id }}</th>
                                     <td class="text-center">{{ item.content }}</td>
                                     <td class="text-center">{{ item.createtime }}</td>
